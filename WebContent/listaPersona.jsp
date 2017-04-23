@@ -34,5 +34,9 @@
 		</table>
 	
 	</div>
+	<form method="get" action="PersonaController">
+		<input type="hidden" name="accion" value="insertar">
+		<button class="btn-primary">Agregar</button>
+	</form>
 </body>
 </html>

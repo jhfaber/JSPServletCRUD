@@ -35,7 +35,7 @@ public class PersonaController extends HttpServlet {
 			redireccion = INSERT_EDIT;
 			int id = Integer.parseInt(req.getParameter("id"));
 			Persona persona = dao.listarPorId(id);
-			req.setAttribute("personas", persona);
+			req.setAttribute("persona", persona);
 		}else if(accion.equalsIgnoreCase("INSERTAR")){
 			redireccion = INSERT_EDIT;
 		}else{
@@ -49,6 +49,22 @@ public class PersonaController extends HttpServlet {
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		//Con el metodo POST recibo toda la data de mis formularios. min 52
+		IPersonaDAO dao = new PersonaDAOImpl();
+		Persona persona = new Persona();
+		persona.setNombres(req.getParameter("nombres"));
+		persona.setApellidos(req.getParameter("apellidos"));
+		String id=req.getParameter("id");
+		
+		if(id== null || id.isEmpty()){
+			dao.agregar(persona);
+		}else{
+			persona.setId(Integer.parseInt(id));
+			dao.actualizar(persona);
+		}
+		req.setAttribute("personas", dao.listarTodos());
+		RequestDispatcher vista = req.getRequestDispatcher(LIST_PERSONA);
+		vista.forward(req, resp);
 		
 	}
 	

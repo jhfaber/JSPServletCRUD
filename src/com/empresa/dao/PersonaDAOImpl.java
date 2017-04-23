@@ -71,7 +71,7 @@ public class PersonaDAOImpl implements IPersonaDAO{
 		List<Persona> personas = new ArrayList<>();
 		try{
 			Statement statement = cx.createStatement();
-			ResultSet resulSet = statement.executeQuery("Select * FROM persona" );
+			ResultSet resulSet = statement.executeQuery("Select * FROM persona ORDER BY 1" );
 			while(resulSet.next()){
 				Persona persona = new Persona(); 
 			    persona.setId(resulSet.getInt("id"));
